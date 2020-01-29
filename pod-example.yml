@@ -13,14 +13,14 @@ spec:
     volumeMounts:
     - name: html
       mountPath: /usr/share/nginx/html
-  - name: filecontainer
-    image: debian
-    volumeMounts:
-    - name: html
-      mountPath: /html
-    command: ["/bin/sh", "-c"]
-    args:
-      - while true; do
-         date >> /html/index.html;
-         sleep 1;
-        done
+  # - name: filecontainer
+  #   image: debian
+  #   volumeMounts:
+  #   - name: html
+  #     mountPath: /html
+  #   command: ["/bin/sh", "-c"]
+  #   args:
+  #     - while true; do
+  #        date >> /html/index.html;
+  #        sleep 1;
+  #       done
