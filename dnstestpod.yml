@@ -1,0 +1,14 @@
+apiVersion: extensions/v1beta1
+kind: Pod
+metadata:
+  name: dnstest
+  namespace: ops
+spec:
+  containers:
+  - name: dnstestpod
+    image: opensuse/tumbleweed
+    ports:
+    - containerPort: 12345
+    command: ["/bin/bash"]
+    args: ["-c", "zypper -q install -y netcat-openbsd net-tools && hostname -A && hostname -I && grep $(hostname -i) /etc/hosts && while :; do netcat -lvp 12345; done"]
+    
