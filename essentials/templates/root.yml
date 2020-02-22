@@ -1,0 +1,35 @@
+Parameters:
+  ImageId:
+    Type: String
+    Default: ami-096da10df231117a7
+  KeyName:
+    Type: String
+    Default: ricmaxjr_tokyo_key_pair
+Resources:
+  KubeNodeInstance1:
+    Type: AWS::EC2::Instance
+    Properties:
+      InstanceType: t2.small
+      ImageId: !Ref ImageId
+      KeyName: !Ref KeyName
+      Tags:
+      - Key: Name
+        Value: KubeNodeInstance1
+  KubeNodeInstance2:
+    Type: AWS::EC2::Instance
+    Properties:
+      InstanceType: t2.small
+      ImageId: !Ref ImageId
+      KeyName: !Ref KeyName
+      Tags:
+      - Key: Name
+        Value: KubeNodeInstance2
+  KubeMasterInstance:
+    Type: AWS::EC2::Instance
+    Properties:
+      InstanceType: t2.small
+      ImageId: !Ref ImageId
+      KeyName: !Ref KeyName
+      Tags:
+      - Key: Name
+        Value: KubeMasterInstance

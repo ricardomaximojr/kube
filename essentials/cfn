@@ -1,0 +1,23 @@
+#!/bin/bash
+
+validate() {
+    aws \
+    --profile r \
+    cloudformation validate-template \
+    --template-body file://./templates/root.yml
+}
+create() {
+    aws \
+    --profile r \
+    cloudformation create-stack \
+    --stack-name kube-essentials-trn \
+    --template-body file://./templates/root.yml
+}
+update() {
+    aws \
+    --profile r \
+    cloudformation update-stack \
+    --stack-name kube-essentials-trn \
+    --template-body file://./templates/root.yml
+}
+"$@"

@@ -1,2 +1,5 @@
 kubeadm join 10.0.1.100:6443 --token weu8k9.vmcjk70hci51krv2 \
     --discovery-token-ca-cert-hash sha256:b8723602b28772ce69e030a4c2deb0ba1edf2611b9bee69bfd1a536ddd100f28
+
+kubeadm join 172.31.22.180:6443 --token t8ds99.qngmama8ibuhsogt --discovery-token-ca-cert-hash sha256:5b9e7ab4cbec533437639f3849d00fb7ec2fb00d3ed290aa2a6c012195977658
+
