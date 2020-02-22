@@ -26,9 +26,63 @@ Delete the pod:
 kubectl delete pod nginx
 
 # CLUSTERING AND NODES
+Nodes are an essential part of the Kubernetes cluster. They are the machines where your cluster's container workloads are executed. In this lesson, we will discuss what nodes are in Kubernetes, and we will explore some ways in which you can find information about nodes in your cluster.
 
+Here are the commands used in this lesson:
+
+Get a list of nodes:
+kubectl get nodes
+
+Get more information about a specific node:
+kubectl describe node $node_name
 
 # NETRWORKING IN KUBERNETES
+
+Networking is an important part of understanding the basics of Kubernetes. This lesson provides a high-level overview of what a Kubernetes virtual cluster network looks like. We will also demonstrate how the network functions by contacting one pod from another pod over the virtual network.
+
+Create a deployment with two nginx pods:
+    cat << EOF | kubectl create -f -
+    apiVersion: apps/v1
+    kind: Deployment
+    metadata:
+        name: nginx
+        labels:
+            app: nginx
+    spec:
+        replicas: 2
+        selector:
+            matchLabels:
+            app: nginx
+        template:
+            metadata:
+            labels:
+                app: nginx
+            spec:
+            containers:
+            - name: nginx
+                image: nginx:1.15.4
+                ports:
+                - containerPort: 80
+    EOF
+Create a busybox pod to use for testing:
+    cat << EOF | kubectl create -f -
+    apiVersion: v1
+    kind: Pod
+    metadata:
+    name: busybox
+    spec:
+    containers:
+    - name: busybox
+        image: radial/busyboxplus:curl
+        args:
+        - sleep
+        - "1000"
+    EOF
+Get the IP addresses of your pods:
+    kubectl get pods -o wide
+Get the IP address of one of the nginx pods, then contact that nginx pod from the busybox pod using the nginx pod's IP address:
+    kubectl exec busybox -- curl $nginx_pod_ip
+
 
 
 # KUBERNETES ARCHITECTURE AND COMPONENTS
