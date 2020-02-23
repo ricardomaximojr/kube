@@ -99,6 +99,15 @@ Check the status of the kubelet service:
 
 # KUBERNETES DEPLOYMENTS
 
+Pods are a great way to organize and manage containers, but what if I want to spin up and automate multiple pods?
+
+'Deployments' are a great way to automate the management of your pods. A deployment allows you to specify a 'desired state' for a ste of pods. The cluster will then constantly work to maintain that desired state.
+
+For example:
+- 'Scaling' - with a deployment, you can specify the number of replicas you want, and the deployment will create(or remove) pods to meet the number of repolicas
+- 'Rolling Updates' - with a deployment, you can change the deployment container image to a new version of the image. The deployment will gradually replace existing containers with the new version
+- 'Self-Healing' - If one of the pods in the deployment is accidentally destroyed, the deployment will immediately spin up a new one to replace it.
+
 Deployments are an important tool if you want to take full advantage of the automation capabilities provided by Kubernetes. In this lesson, we will discuss what deployments are and briefly mention some common use cases for Kubernetes deployments. We will also create a simple deployment in our cluster and explore how we can interact with it.
 
 Here are the commands used in this lesson:
@@ -139,6 +148,12 @@ Get a list of pods:
 You should see two pods created by the deployment.
 
 # KUBERNETES SERVICES
+
+'Services' are another important component of deploying apps in K8s.
+
+Services allow you to dynamically access a group of replica pods. Replica pods are often being created and destroyed, so what happens to others pods or external entities which need to access those pods.
+
+A Service creates an 'abstraction layer' on top of a set of replica pods. You can access the service rather than accessing the pods directly, so as pods come and go, you get uninterrupted, dynamic access to whatever replicas are up at the time.
 
 While deployments provide a great way to automate the management of your pods, you need a way to easily communicate with the dynamic set of replicas managed by a deployment. This is where services come in. In this lesson, we will discuss what services are in Kubernetes, demonstrate how to create a simple service, and explore that service in our own cluster.
 
