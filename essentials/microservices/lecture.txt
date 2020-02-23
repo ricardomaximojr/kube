@@ -1,0 +1,68 @@
+# WHAT ARE MICROSERVICES
+
+Microservices provide many benefits in the design and management of applications, but they also introduce a lot of complexity. In this lesson, we will talk about what microservices are and why so many people today are excited about them. We will also talk about the relationship between microservices and Kubernetes, and how Kubernetes can help manage the additional complexity that microservices bring.
+
+DEPLOYING THE ROBOT SHOP app
+
+Kubernetes is a powerful tool for managing and deploying microservice applications. In this lesson, we will deploy a microservice application consisting of multiple varied components to our cluster. We will also explore the application briefly in order to get a hands-on glimpse of what a microservice application might look like, and how it might run in a Kubernetes cluster.
+
+Here are the commands used in the demonstration to deploy the Stan's Robot Shop application:
+
+Clone the Git repository:
+    cd ~/
+    git clone https://github.com/linuxacademy/robot-shop.git
+
+Create a namespace and deploy the application objects to the namespace using the deployment descriptors from the Git repository:
+    kubectl create namespace robot-shop
+    kubectl -n robot-shop create -f ~/robot-shop/K8s/descriptors/
+
+Get a list of the application's pods and wait for all of them to finish starting up:
+    kubectl get pods -n robot-shop -w
+
+Once all the pods are up, you can access the application in a browser using the public IP of one of your Kubernetes servers and port 30080:
+    http://$kube_server_public_ip:30080
+
+# HANDS-ON lab
+
+Description
+Microservice applications can be quite complex but that complexity can offer many benefits. Kubernetes can help you take advantage of those benefits by making these complex infrastructures easier to manage through automation. In this hands-on lab, you will see the value of Kubernetes firsthand as you deploy a complex microservice architecture to the cluster and then independently scale some of its components.
+
+Learning Objectives
+check_circle
+Deploy the Stan's Robot Shop app to the cluster.
+keyboard_arrow_up
+
+Clone the Git repo that contains the pre-made descriptors:
+    cd ~/
+    git clone https://github.com/linuxacademy/robot-shop.git
+
+Since this application has many components, it is a good idea to create a separate namespace for the app:
+    kubectl create namespace robot-shop
+
+Deploy the app to the cluster:
+    kubectl -n robot-shop create -f ~/robot-shop/K8s/descriptors/
+
+Check the status of the application's pods:
+    kubectl get pods -n robot-shop
+
+You should be able to reach the robot shop app from your browser using the Kube master node's public IP: 
+    http://$kube_master_public_ip:30080
+check_circle
+
+Scale up the MongoDB deployment to two replicas instead of just one.
+keyboard_arrow_up
+Edit the deployment descriptor:
+    kubectl edit deployment mongodb -n robot-shop
+
+You should see some YAML describing the deployment object.
+
+Under spec:, look for the line that says replicas: 1 and change it to replicas: 2.
+Save and exit.
+
+Check the status of the deployment with:
+    kubectl get deployment mongodb -n robot-shop
+
+After a few moments, the number of available replicas should be 2
+
+
+
